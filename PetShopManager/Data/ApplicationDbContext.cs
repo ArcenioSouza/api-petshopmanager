@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace locadoragft.Data
+namespace PetShopManager.Data
 {
     public class ApplicationDbContext : DbContext
     {
