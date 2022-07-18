@@ -78,6 +78,6 @@ xUnit.
 # Imagens do processo de organização e criação do projeto
 
 <details>
-<summary>🏦 Backlog do projeto</summary>
+<summary>🖼️ Backlog do projeto</summary>
 <img src="./assets/img/Trello1.JPG" width="900px">
 </details>
