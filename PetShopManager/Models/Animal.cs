@@ -11,7 +11,7 @@ namespace PetShopManager.Models
         public string Nome { get; set; }
         public string Sexo { get; set; }
         public double PesoAtual { get; set; }
-        public double AlturaAtual { get; set; }      
+        public double AlturaAtual { get; set; }
         public string Raca { get; set; }
 
         //Informações que virão da api a partir da raça
@@ -20,5 +20,6 @@ namespace PetShopManager.Models
         public string Temperamento { get; set; }
         public string PesoMedio { get; set; }
         public string AlturaMedia { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -10,7 +10,6 @@ namespace PetShopManager.Data
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<Login> Logins { get; set; }
         public DbSet<Servico> Servicos { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

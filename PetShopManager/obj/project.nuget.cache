@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "h+KaKhb6EPM6EjhL4gYpbXprJEmY+dmLnWT6RuFvU+LZOiQLAwXdgPRcEmjw1LE0twst4WgEqQapaveoUwbruQ==",
+  "dgSpecHash": "ZO1Ofx+UBM25xwDVT6XSNRbcZLisQuTiqC50AIRE7AbM2x+A3Pz5HhsF5hDgdb8EX3/tGwraJnAvsldZBKr5Cg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj",
+  "projectFilePath": "C:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AOZI\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.17\\microsoft.aspnetcore.authentication.jwtbearer.5.0.17.nupkg.sha512",

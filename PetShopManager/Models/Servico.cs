@@ -10,10 +10,6 @@ namespace PetShopManager.Models
         public int Id { get; set; }
         public string Tipo { get; set; }
         public double Valor { get; set; }
-        
-        
-        
-        
-        
+        public bool IsActive { get; set; }
     }
 }

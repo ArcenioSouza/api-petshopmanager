@@ -12,5 +12,6 @@ namespace PetShopManager.Models
         public Cargo Cargo { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
+        public bool IsActive { get; set; }
     }
 }

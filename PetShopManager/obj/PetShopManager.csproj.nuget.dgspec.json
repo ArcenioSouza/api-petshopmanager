@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj": {}
+    "C:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj": {}
   },
   "projects": {
-    "c:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj": {
+    "C:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj",
+        "projectUniqueName": "C:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj",
         "projectName": "PetShopManager",
-        "projectPath": "c:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj",
+        "projectPath": "C:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj",
         "packagesPath": "C:\\Users\\AOZI\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\obj\\",
+        "outputPath": "C:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AOZI\\AppData\\Roaming\\NuGet\\NuGet.Config"
