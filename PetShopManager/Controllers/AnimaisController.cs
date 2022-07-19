@@ -87,6 +87,7 @@ namespace PetShopManager.Controllers
                     {
                         Nome = animalTemp.Nome,
                         Sexo = animalTemp.Sexo,
+                        Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.Cliente.Id),
                         PesoAtual = animalTemp.PesoAtual,
                         AlturaAtual = animalTemp.AlturaAtual,
                         Raca = animalTemp.Raca,
@@ -103,6 +104,7 @@ namespace PetShopManager.Controllers
                     {
                         Nome = animalTemp.Nome,
                         Sexo = animalTemp.Sexo,
+                        Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.Cliente.Id),
                         PesoAtual = animalTemp.PesoAtual,
                         AlturaAtual = animalTemp.AlturaAtual,
                         Raca = animalTemp.Raca,
@@ -134,6 +136,7 @@ namespace PetShopManager.Controllers
                 if (AnimalParaAtualizar is null) return NotFound("Não foi encontrado animal com esse Id");
                 AnimalParaAtualizar.Nome = animalTemp.Nome ?? AnimalParaAtualizar.Nome;
                 AnimalParaAtualizar.Sexo = animalTemp.Sexo ?? AnimalParaAtualizar.Sexo;
+                AnimalParaAtualizar.Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.Cliente.Id) ?? AnimalParaAtualizar.Cliente;
                 AnimalParaAtualizar.PesoAtual = animalTemp.PesoAtual == 0 ? AnimalParaAtualizar.PesoAtual : animalTemp.PesoAtual;
                 AnimalParaAtualizar.AlturaAtual = animalTemp.AlturaAtual == 0 ? AnimalParaAtualizar.AlturaAtual : animalTemp.AlturaAtual;
                 AnimalParaAtualizar.Raca = animalTemp.Raca ?? AnimalParaAtualizar.Raca;
@@ -162,7 +165,6 @@ namespace PetShopManager.Controllers
             {
                 return BadRequest(new { erro = ex.Message });
             }
-
         }
 
         [HttpDelete("{id}")]
