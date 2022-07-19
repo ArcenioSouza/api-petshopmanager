@@ -35,6 +35,21 @@ namespace PetShopManager.Controllers
             Animal AnimalPesquisado = await _database.Animais.FirstAsync(animal => animal.Id == id);
             return Ok(AnimalPesquisado);
         }
+
+        [HttpGet("search/{raca}")]
+        public async Task<ActionResult> GetRaca(string raca)
+        {
+            var req = new ReqDogApi();
+            var response = await req.GetInfoDogs(raca);
+            JArray json = JArray.Parse(response);
+            List<string> racas = new();
+            foreach (var item in json)
+            {
+                racas.Add((string)item["name"]);                
+            }
+            return Ok(new {racas});
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post(Animal animalTemp)
         {
