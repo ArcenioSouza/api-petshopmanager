@@ -1,4 +1,3 @@
-using System.Runtime.Serialization.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,118 +24,163 @@ namespace PetShopManager.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            //Depois mudar para aparecer apenas os que estão ativos.
-            List<Animal> ListaDeAnimais = await _database.Animais.ToListAsync();
-            return Ok(ListaDeAnimais);
+            try
+            {
+                List<Animal> ListaDeAnimais = await _database.Animais.Where(animal => animal.IsActive == true).ToListAsync();
+                if (ListaDeAnimais.Count == 0) return NotFound("Nenhum animal encontrado");
+                return Ok(ListaDeAnimais);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
-            Animal AnimalPesquisado = await _database.Animais.FirstAsync(animal => animal.Id == id);
-            return Ok(AnimalPesquisado);
+            try
+            {
+                Animal AnimalPesquisado = await _database.Animais.FirstAsync(animal => animal.Id == id);
+                return Ok(AnimalPesquisado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { msg = "Nenhum animal encontrado com esse id", error = ex.Message });
+            }
         }
 
         [HttpGet("search/{raca}")]
         public async Task<ActionResult> GetRaca(string raca)
         {
-            var req = new ReqDogApi();
-            var response = await req.GetInfoDogs(raca);
-            JArray json = JArray.Parse(response);
-            List<string> racas = new();
-            foreach (var item in json)
+            try
             {
-                racas.Add((string)item["name"]);                
+                var req = new ReqDogApi();
+                var response = await req.GetInfoDogs(raca);
+                JArray json = JArray.Parse(response);
+                if (json.Count == 0) return NotFound("Nenhuma raça encontrada");
+                List<string> racas = new();
+                foreach (var item in json)
+                {
+                    racas.Add((string)item["name"]);
+                }
+                return Ok(new { racas });
             }
-            return Ok(new {racas});
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult> Post(Animal animalTemp)
         {
-            Animal AnimalParaSalvar;
-            var req = new ReqDogApi();
-            var response = await req.GetInfoDogs(animalTemp.Raca);
-            JArray json = JArray.Parse(response);
-
-            if (json.Count == 0)
+            try
             {
-                AnimalParaSalvar = new()
+                Animal AnimalParaSalvar;
+                var req = new ReqDogApi();
+                var response = await req.GetInfoDogs(animalTemp.Raca);
+                JArray json = JArray.Parse(response);
+
+                if (json.Count == 0)
                 {
-                    Nome = animalTemp.Nome,
-                    Sexo = animalTemp.Sexo,
-                    PesoAtual = animalTemp.PesoAtual,
-                    AlturaAtual = animalTemp.AlturaAtual,
-                    Raca = animalTemp.Raca,
-                    TempoDeVida = "",
-                    Temperamento = "",
-                    PesoMedio = "",
-                    AlturaMedia = "",
-                    IsActive = true
-                };
+                    AnimalParaSalvar = new()
+                    {
+                        Nome = animalTemp.Nome,
+                        Sexo = animalTemp.Sexo,
+                        PesoAtual = animalTemp.PesoAtual,
+                        AlturaAtual = animalTemp.AlturaAtual,
+                        Raca = animalTemp.Raca,
+                        TempoDeVida = "",
+                        Temperamento = "",
+                        PesoMedio = "",
+                        AlturaMedia = "",
+                        IsActive = true
+                    };
+                }
+                else
+                {
+                    AnimalParaSalvar = new()
+                    {
+                        Nome = animalTemp.Nome,
+                        Sexo = animalTemp.Sexo,
+                        PesoAtual = animalTemp.PesoAtual,
+                        AlturaAtual = animalTemp.AlturaAtual,
+                        Raca = animalTemp.Raca,
+                        TempoDeVida = (string)json[0]["life_span"],
+                        Temperamento = (string)json[0]["temperament"],
+                        PesoMedio = (string)json[0]["weight"]["metric"],
+                        AlturaMedia = (string)json[0]["height"]["metric"],
+                        IsActive = true
+                    };
+
+                }
+
+                await _database.Animais.AddAsync(AnimalParaSalvar);
+                await _database.SaveChangesAsync();
+                return Created("", AnimalParaSalvar);
             }
-            else
+            catch (Exception ex)
             {
-                AnimalParaSalvar = new()
-                {
-                    Nome = animalTemp.Nome,
-                    Sexo = animalTemp.Sexo,
-                    PesoAtual = animalTemp.PesoAtual,
-                    AlturaAtual = animalTemp.AlturaAtual,
-                    Raca = animalTemp.Raca,
-                    TempoDeVida = (string)json[0]["life_span"],
-                    Temperamento = (string)json[0]["temperament"],
-                    PesoMedio = (string)json[0]["weight"]["metric"],
-                    AlturaMedia = (string)json[0]["height"]["metric"],
-                    IsActive = true
-                };
-
+                return BadRequest(new { erro = ex.Message });
             }
-
-            await _database.Animais.AddAsync(AnimalParaSalvar);
-            await _database.SaveChangesAsync();
-            return Created("", AnimalParaSalvar);
         }
 
         [HttpPatch]
         public async Task<ActionResult> Patch(Animal animalTemp)
         {
-            Animal AnimalParaAtualizar = _database.Animais.First(animal => animal.Id == animalTemp.Id);
-
-            AnimalParaAtualizar.Nome = animalTemp.Nome ?? AnimalParaAtualizar.Nome;
-            AnimalParaAtualizar.Sexo = animalTemp.Sexo ?? AnimalParaAtualizar.Sexo;
-            AnimalParaAtualizar.PesoAtual = animalTemp.PesoAtual == 0 ? AnimalParaAtualizar.PesoAtual : animalTemp.PesoAtual;
-            AnimalParaAtualizar.AlturaAtual = animalTemp.AlturaAtual == 0 ? AnimalParaAtualizar.AlturaAtual : animalTemp.AlturaAtual;
-            AnimalParaAtualizar.Raca = animalTemp.Raca ?? AnimalParaAtualizar.Raca;
-
-            if (AnimalParaAtualizar.Raca != null || AnimalParaAtualizar.Raca != "")
+            try
             {
-                var req = new ReqDogApi();
-                var response = await req.GetInfoDogs(AnimalParaAtualizar.Raca);
-                JArray json = JArray.Parse(response);
+                Animal AnimalParaAtualizar = _database.Animais.First(animal => animal.Id == animalTemp.Id);
+                if (AnimalParaAtualizar is null) return NotFound("Não foi encontrado animal com esse Id");
+                AnimalParaAtualizar.Nome = animalTemp.Nome ?? AnimalParaAtualizar.Nome;
+                AnimalParaAtualizar.Sexo = animalTemp.Sexo ?? AnimalParaAtualizar.Sexo;
+                AnimalParaAtualizar.PesoAtual = animalTemp.PesoAtual == 0 ? AnimalParaAtualizar.PesoAtual : animalTemp.PesoAtual;
+                AnimalParaAtualizar.AlturaAtual = animalTemp.AlturaAtual == 0 ? AnimalParaAtualizar.AlturaAtual : animalTemp.AlturaAtual;
+                AnimalParaAtualizar.Raca = animalTemp.Raca ?? AnimalParaAtualizar.Raca;
 
-                if (json.Count != 0)
+                if (AnimalParaAtualizar.Raca != null || AnimalParaAtualizar.Raca != "")
                 {
-                    AnimalParaAtualizar.TempoDeVida = (string)json[0]["life_span"];
-                    AnimalParaAtualizar.Temperamento = (string)json[0]["temperament"];
-                    AnimalParaAtualizar.PesoMedio = (string)json[0]["weight"]["metric"];
-                    AnimalParaAtualizar.AlturaMedia = (string)json[0]["height"]["metric"];
-                }
-            }
-            AnimalParaAtualizar.IsActive = true;
+                    var req = new ReqDogApi();
+                    var response = await req.GetInfoDogs(AnimalParaAtualizar.Raca);
+                    JArray json = JArray.Parse(response);
 
-            _database.Animais.Update(AnimalParaAtualizar);
-            await _database.SaveChangesAsync();
-            return Created("", AnimalParaAtualizar);
+                    if (json.Count != 0)
+                    {
+                        AnimalParaAtualizar.TempoDeVida = (string)json[0]["life_span"];
+                        AnimalParaAtualizar.Temperamento = (string)json[0]["temperament"];
+                        AnimalParaAtualizar.PesoMedio = (string)json[0]["weight"]["metric"];
+                        AnimalParaAtualizar.AlturaMedia = (string)json[0]["height"]["metric"];
+                    }
+                }
+                AnimalParaAtualizar.IsActive = true;
+
+                _database.Animais.Update(AnimalParaAtualizar);
+                await _database.SaveChangesAsync();
+                return Created("", AnimalParaAtualizar);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            Animal AnimalParaDeletar = _database.Animais.First(animal => animal.Id == id);
-            AnimalParaDeletar.IsActive = false;
-            _database.Animais.Update(AnimalParaDeletar);
-            await _database.SaveChangesAsync();
-            return Ok(AnimalParaDeletar.Nome + " removido com sucesso");
+            try
+            {
+                Animal AnimalParaDeletar = _database.Animais.First(animal => animal.Id == id);
+                if (AnimalParaDeletar is null) return NotFound("Não foi encontrado animal com esse Id");
+                AnimalParaDeletar.IsActive = false;
+                _database.Animais.Update(AnimalParaDeletar);
+                await _database.SaveChangesAsync();
+                return Ok(AnimalParaDeletar.Nome + " removido com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
         }
     }
 }
