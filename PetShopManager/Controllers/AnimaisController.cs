@@ -72,7 +72,7 @@ namespace PetShopManager.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Animal animalTemp)
+        public async Task<ActionResult> Post(AnimalDTO animalTemp)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace PetShopManager.Controllers
                     {
                         Nome = animalTemp.Nome,
                         Sexo = animalTemp.Sexo,
-                        Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.Cliente.Id),
+                        Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.ClienteID),
                         PesoAtual = animalTemp.PesoAtual,
                         AlturaAtual = animalTemp.AlturaAtual,
                         Raca = animalTemp.Raca,
@@ -104,7 +104,7 @@ namespace PetShopManager.Controllers
                     {
                         Nome = animalTemp.Nome,
                         Sexo = animalTemp.Sexo,
-                        Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.Cliente.Id),
+                        Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.ClienteID),
                         PesoAtual = animalTemp.PesoAtual,
                         AlturaAtual = animalTemp.AlturaAtual,
                         Raca = animalTemp.Raca,
@@ -114,7 +114,6 @@ namespace PetShopManager.Controllers
                         AlturaMedia = (string)json[0]["height"]["metric"],
                         IsActive = true
                     };
-
                 }
 
                 await _database.Animais.AddAsync(AnimalParaSalvar);
@@ -128,15 +127,15 @@ namespace PetShopManager.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult> Patch(Animal animalTemp)
+        public async Task<ActionResult> Patch(AnimalDTO animalTemp)
         {
             try
             {
-                Animal AnimalParaAtualizar = _database.Animais.First(animal => animal.Id == animalTemp.Id);
+                Animal AnimalParaAtualizar = _database.Animais.First(animal => animal.Id == animalTemp.ClienteID);
                 if (AnimalParaAtualizar is null) return NotFound("Não foi encontrado animal com esse Id");
                 AnimalParaAtualizar.Nome = animalTemp.Nome ?? AnimalParaAtualizar.Nome;
                 AnimalParaAtualizar.Sexo = animalTemp.Sexo ?? AnimalParaAtualizar.Sexo;
-                AnimalParaAtualizar.Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.Cliente.Id) ?? AnimalParaAtualizar.Cliente;
+                AnimalParaAtualizar.Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.ClienteID) ?? AnimalParaAtualizar.Cliente;
                 AnimalParaAtualizar.PesoAtual = animalTemp.PesoAtual == 0 ? AnimalParaAtualizar.PesoAtual : animalTemp.PesoAtual;
                 AnimalParaAtualizar.AlturaAtual = animalTemp.AlturaAtual == 0 ? AnimalParaAtualizar.AlturaAtual : animalTemp.AlturaAtual;
                 AnimalParaAtualizar.Raca = animalTemp.Raca ?? AnimalParaAtualizar.Raca;
