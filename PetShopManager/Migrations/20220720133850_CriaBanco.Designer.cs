@@ -9,8 +9,8 @@ using PetShopManager.Data;
 namespace PetShopManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220718232133_CreateSchema")]
-    partial class CreateSchema
+    [Migration("20220720133850_CriaBanco")]
+    partial class CriaBanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,9 @@ namespace PetShopManager.Migrations
 
                     b.Property<string>("AlturaMedia")
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("ClienteId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
@@ -57,6 +60,8 @@ namespace PetShopManager.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClienteId");
+
                     b.ToTable("Animais");
                 });
 
@@ -65,6 +70,9 @@ namespace PetShopManager.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<double>("AlturaDoAnimalAtualizado")
+                        .HasColumnType("double");
 
                     b.Property<int?>("AnimalId")
                         .HasColumnType("int");
@@ -84,6 +92,12 @@ namespace PetShopManager.Migrations
                     b.Property<string>("Observacoes")
                         .HasColumnType("longtext");
 
+                    b.Property<double>("PesoDoAnimalAtualizado")
+                        .HasColumnType("double");
+
+                    b.Property<int?>("ServicoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
@@ -91,6 +105,8 @@ namespace PetShopManager.Migrations
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("FuncionarioId");
+
+                    b.HasIndex("ServicoId");
 
                     b.ToTable("Atendimentos");
                 });
@@ -186,6 +202,15 @@ namespace PetShopManager.Migrations
                     b.ToTable("Servicos");
                 });
 
+            modelBuilder.Entity("PetShopManager.Models.Animal", b =>
+                {
+                    b.HasOne("PetShopManager.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId");
+
+                    b.Navigation("Cliente");
+                });
+
             modelBuilder.Entity("PetShopManager.Models.Atendimento", b =>
                 {
                     b.HasOne("PetShopManager.Models.Animal", "Animal")
@@ -200,11 +225,17 @@ namespace PetShopManager.Migrations
                         .WithMany()
                         .HasForeignKey("FuncionarioId");
 
+                    b.HasOne("PetShopManager.Models.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId");
+
                     b.Navigation("Animal");
 
                     b.Navigation("Cliente");
 
                     b.Navigation("Funcionario");
+
+                    b.Navigation("Servico");
                 });
 
             modelBuilder.Entity("PetShopManager.Models.Funcionario", b =>
