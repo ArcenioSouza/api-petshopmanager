@@ -8,6 +8,7 @@ using PetShopManager.Data;
 using PetShopManager.Models;
 using PetShopManager.Services;
 using Newtonsoft.Json.Linq;
+using PetShopManager.DTO;
 
 namespace PetShopManager.Controllers
 {
@@ -26,13 +27,13 @@ namespace PetShopManager.Controllers
         {
             try
             {
-                List<Animal> ListaDeAnimais = await _database.Animais.Where(animal => animal.IsActive == true).ToListAsync();
+                List<Animal> ListaDeAnimais = await _database.Animais.Include(cliente => cliente.Cliente).Where(animal => animal.IsActive == true).ToListAsync();
                 if (ListaDeAnimais.Count == 0) return NotFound("Nenhum animal encontrado");
                 return Ok(ListaDeAnimais);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { erro = ex.Message });
             }
         }
         [HttpGet("{id}")]
@@ -40,7 +41,7 @@ namespace PetShopManager.Controllers
         {
             try
             {
-                Animal AnimalPesquisado = await _database.Animais.FirstAsync(animal => animal.Id == id);
+                Animal AnimalPesquisado = await _database.Animais.Include(cliente => cliente.Cliente).FirstAsync(animal => animal.Id == id);
                 return Ok(AnimalPesquisado);
             }
             catch (Exception ex)
@@ -67,7 +68,7 @@ namespace PetShopManager.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { erro = ex.Message });
             }
         }
 
@@ -126,12 +127,12 @@ namespace PetShopManager.Controllers
             }
         }
 
-        [HttpPatch]
-        public async Task<ActionResult> Patch(AnimalDTO animalTemp)
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> Patch(int id, AnimalDTO animalTemp)
         {
             try
             {
-                Animal AnimalParaAtualizar = _database.Animais.First(animal => animal.Id == animalTemp.ClienteID);
+                Animal AnimalParaAtualizar = _database.Animais.First(animal => animal.Id == id);
                 if (AnimalParaAtualizar is null) return NotFound("Não foi encontrado animal com esse Id");
                 AnimalParaAtualizar.Nome = animalTemp.Nome ?? AnimalParaAtualizar.Nome;
                 AnimalParaAtualizar.Sexo = animalTemp.Sexo ?? AnimalParaAtualizar.Sexo;

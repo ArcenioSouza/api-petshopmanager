@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PetShopManager.Models
+namespace PetShopManager.DTO
 {
     public class AnimalDTO
     {
