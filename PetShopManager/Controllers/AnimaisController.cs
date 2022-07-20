@@ -9,6 +9,9 @@ using PetShopManager.Models;
 using PetShopManager.Services;
 using Newtonsoft.Json.Linq;
 using PetShopManager.DTO;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
 
 namespace PetShopManager.Controllers
 {
@@ -65,6 +68,24 @@ namespace PetShopManager.Controllers
                     racas.Add((string)item["name"]);
                 }
                 return Ok(new { racas });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+        }
+
+        [HttpGet("random/dogs")]
+        public async Task<ActionResult> GetDogsRandom()
+        {
+            try
+            {
+                var req = new ReqDogApi();
+                var response = await req.GetRandomDogs(); 
+
+                var jsonList = JsonConvert.DeserializeObject<List<Cachorros>>(response);               
+                Console.WriteLine(jsonList);                
+                return Ok(jsonList);
             }
             catch (Exception ex)
             {
