@@ -10,8 +10,6 @@ using PetShopManager.Services;
 using Newtonsoft.Json.Linq;
 using PetShopManager.DTO;
 using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
 
 namespace PetShopManager.Controllers
 {
@@ -45,6 +43,7 @@ namespace PetShopManager.Controllers
             try
             {
                 Animal AnimalPesquisado = await _database.Animais.Include(cliente => cliente.Cliente).FirstAsync(animal => animal.Id == id);
+                if(AnimalPesquisado.IsActive == false) return Ok("O animal com esse id não está ativo");
                 return Ok(AnimalPesquisado);
             }
             catch (Exception ex)
