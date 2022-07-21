@@ -1,4 +1,6 @@
 
+using System;
+
 namespace PetShopManager.Models
 {
     public class Animal
@@ -9,6 +11,7 @@ namespace PetShopManager.Models
         public string Sexo { get; set; }
         public double PesoAtual { get; set; }
         public double AlturaAtual { get; set; }
+        public DateTime DataNascimento { get; set; }  
         public string Raca { get; set; }
         public string TempoDeVida { get; set; }
         public string Temperamento { get; set; }

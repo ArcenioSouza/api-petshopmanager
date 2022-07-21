@@ -32,6 +32,9 @@ namespace PetShopManager.Migrations
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
 
@@ -160,6 +163,9 @@ namespace PetShopManager.Migrations
 
                     b.Property<int?>("CargoId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .HasColumnType("longtext");

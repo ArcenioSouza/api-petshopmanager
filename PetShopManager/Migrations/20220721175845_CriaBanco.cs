@@ -75,6 +75,8 @@ namespace PetShopManager.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Cpf = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CargoId = table.Column<int>(type: "int", nullable: true),
                     Email = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -107,6 +109,7 @@ namespace PetShopManager.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PesoAtual = table.Column<double>(type: "double", nullable: false),
                     AlturaAtual = table.Column<double>(type: "double", nullable: false),
+                    DataNascimento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Raca = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     TempoDeVida = table.Column<string>(type: "longtext", nullable: true)
@@ -210,27 +213,26 @@ namespace PetShopManager.Migrations
                 column: "CargoId");
 
             //Cliente
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('1', 'Arcenio', '11111111111', '11999999999', 'arcenioneto@gmail.com', 'Arce@123', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('2', 'Catarina', '22222222222', '11888888888', 'catarina@gmail.com', 'Cata@123', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('3', 'André', '33333333333', '11555555555', 'andre@gmail.com', 'Andre@123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('1', 'Arcenio', '11111111111', '11999999999', 'arcenioneto@gmail.com', 'Arce@123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('2', 'Catarina', '22222222222', '11888888888', 'catarina@gmail.com', 'Cata@123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('3', 'André', '33333333333', '11555555555', 'andre@gmail.com', 'Andre@123', '1')");
 
             //Cargo
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`cargos` (`Id`, `NomeCargo`) VALUES ('1', 'Veterinário')");
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`cargos` (`Id`, `NomeCargo`) VALUES ('2', 'Atendente')");
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`cargos` (`Id`, `NomeCargo`) VALUES ('3', 'Gerente')");
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`cargos` (`Id`, `NomeCargo`) VALUES ('4', 'Tosador')");
+            migrationBuilder.Sql(@"INSERT INTO `cargos` (`Id`, `NomeCargo`) VALUES ('1', 'Veterinário')");
+            migrationBuilder.Sql(@"INSERT INTO `cargos` (`Id`, `NomeCargo`) VALUES ('2', 'Atendente')");
+            migrationBuilder.Sql(@"INSERT INTO `cargos` (`Id`, `NomeCargo`) VALUES ('3', 'Gerente')");
+            migrationBuilder.Sql(@"INSERT INTO `cargos` (`Id`, `NomeCargo`) VALUES ('4', 'Tosador')");
 
             //Funcionario
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`funcionarios` (`Id`, `Nome`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('1', 'João', '1', 'joao@gmail.com', 'Joao@123', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`funcionarios` (`Id`, `Nome`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('2', 'Maria', '2', 'maria@gmail.com', 'Maria@123', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`funcionarios` (`Id`, `Nome`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('3', 'Pedro', '3', 'pedro@gmail.com', 'Pedro@123', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `petshop`.`funcionarios` (`Id`, `Nome`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('4', 'Caio', '4', 'caio@gmail.com', 'Caio@123', '1')");
-
+            migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('1', 'João', '11111111111', '1', 'joao@gmail.com', 'Joao@123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('2', 'Maria', '22222222222', '2', 'maria@gmail.com', 'Maria@123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('3', 'Pedro', '33333333333', '3', 'pedro@gmail.com', 'Pedro@123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('4', 'Caio', '44444444444', '4', 'caio@gmail.com', 'Caio@123', '1')");
 
             //Animal
-            migrationBuilder.Sql(@"INSERT INTO `animais` (`Id`, `Nome`, `ClienteId`, `Sexo`, `PesoAtual`, `AlturaAtual`, `Raca`, `TempoDeVida`, `Temperamento`, `PesoMedio`, `AlturaMedia`, `IsActive`) VALUES ('1', 'Dob', '1', 'Fêmea', '10', '55', 'American Bulldog', '10 - 12 years', 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', '27 - 54', '56 - 69', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `animais` (`Id`, `Nome`, `ClienteId`, `Sexo`, `PesoAtual`, `AlturaAtual`, `Raca`, `TempoDeVida`, `Temperamento`, `PesoMedio`, `AlturaMedia`, `IsActive`) VALUES ('2', 'Rufus', '2', 'Macho', '10', '55', 'American Bulldog', '10 - 12 years', 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', '27 - 54', '56 - 69', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `animais` (`Id`, `Nome`, `ClienteId`, `Sexo`, `PesoAtual`, `AlturaAtual`, `Raca`, `TempoDeVida`, `Temperamento`, `PesoMedio`, `AlturaMedia`, `IsActive`) VALUES ('3', 'Feroz', '3', 'Macho', '10', '55', 'American Bulldog', '10 - 12 years', 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', '27 - 54', '56 - 69', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `animais` (`Id`, `Nome`, `ClienteId`, `Sexo`, `PesoAtual`, `AlturaAtual`, `DataNascimento`, `Raca`, `TempoDeVida`, `Temperamento`, `PesoMedio`, `AlturaMedia`, `IsActive`) VALUES ('1', 'Dob', '1', 'Fêmea', '10', '55', '2022-07-10 00:00:00.000000', 'American Bulldog', '10 - 12 years', 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', '27 - 54', '56 - 69', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `animais` (`Id`, `Nome`, `ClienteId`, `Sexo`, `PesoAtual`, `AlturaAtual`, `DataNascimento`, `Raca`, `TempoDeVida`, `Temperamento`, `PesoMedio`, `AlturaMedia`, `IsActive`) VALUES ('2', 'Rufus', '2', 'Macho', '10', '55', '2022-07-10 00:00:00.000000', 'American Bulldog', '10 - 12 years', 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', '27 - 54', '56 - 69', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `animais` (`Id`, `Nome`, `ClienteId`, `Sexo`, `PesoAtual`, `AlturaAtual`, `DataNascimento`, `Raca`, `TempoDeVida`, `Temperamento`, `PesoMedio`, `AlturaMedia`, `IsActive`) VALUES ('3', 'Feroz', '3', 'Macho', '10', '55', '2022-07-10 00:00:00.000000', 'American Bulldog', '10 - 12 years', 'Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant', '27 - 54', '56 - 69', '1')");
 
             //Servico
             migrationBuilder.Sql(@"INSERT INTO `servicos` (`Id`, `Tipo`, `Valor`, `IsActive`) VALUES ('1', 'Vacinação', '40', '1')");
