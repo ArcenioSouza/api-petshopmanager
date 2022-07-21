@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace PetShopManager.Controllers
         {
              try
             {
-                List<Servico> ListaDeServicos = await _database.Servicos.ToListAsync();
+                List<Servico> ListaDeServicos = await _database.Servicos.Where(servico => servico.IsActive == true).ToListAsync();
                 if (ListaDeServicos.Count == 0) return NotFound("Nenhum serviço encontrado");
                 return Ok(ListaDeServicos);
             }
@@ -40,6 +41,7 @@ namespace PetShopManager.Controllers
             try
             {
                 Servico ServicoPesquisado = await _database.Servicos.FirstAsync(servico => servico.Id == id);
+                if(ServicoPesquisado.IsActive == false) return Ok("Esse serviço não está mais disponível");
                 return Ok(ServicoPesquisado);
             }
             catch (Exception ex)

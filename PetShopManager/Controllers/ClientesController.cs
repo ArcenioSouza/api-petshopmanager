@@ -73,8 +73,8 @@ namespace PetShopManager.Controllers
             {
                 return BadRequest(new { erro = ex.Message });
             }
-
         }
+
         [HttpPatch("{id}")]
         public async Task<ActionResult> Patch(int id, ClienteDTO clienteTemp)
         {
@@ -97,6 +97,7 @@ namespace PetShopManager.Controllers
                 return BadRequest(new { erro = ex.Message });
             }
         }
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -107,7 +108,7 @@ namespace PetShopManager.Controllers
                 ClienteParaDeletar.IsActive = false;
                 _database.Clientes.Update(ClienteParaDeletar);
                 await _database.SaveChangesAsync();
-                return Ok("Cliente: " + ClienteParaDeletar.Nome + " deletado com sucesso");
+                return Ok(ClienteParaDeletar.Nome + " deletado com sucesso");
             }
             catch (Exception ex)
             {
