@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetShopManager.Data;
@@ -55,6 +56,9 @@ namespace PetShopManager.Controllers
         {
             try
             {
+                var clientes = _database.Clientes.ToList();
+                if(clientes.Exists(funcionario => funcionario.Cpf.Equals(clienteTemp.Cpf))) return StatusCode(StatusCodes.Status422UnprocessableEntity, "Cliente já cadastrado");
+
                 Cliente ClienteParaSalvar = new()
                 {
                     Nome = clienteTemp.Nome,
