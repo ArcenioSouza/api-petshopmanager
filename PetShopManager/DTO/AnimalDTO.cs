@@ -12,6 +12,9 @@ namespace PetShopManager.DTO
         public string Sexo { get; set; }
         public double PesoAtual { get; set; }
         public double AlturaAtual { get; set; }
+        [Required(ErrorMessage = "Atributo {0} é obrigatório")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public string DataNascimento { get; set; }  
         public string Raca { get; set; }
     }
 }

@@ -111,6 +111,7 @@ namespace PetShopManager.Controllers
                         Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.ClienteID),
                         PesoAtual = animalTemp.PesoAtual,
                         AlturaAtual = animalTemp.AlturaAtual,
+                        DataNascimento = Convert.ToDateTime(animalTemp.DataNascimento),
                         Raca = animalTemp.Raca,
                         TempoDeVida = "",
                         Temperamento = "",
@@ -128,6 +129,7 @@ namespace PetShopManager.Controllers
                         Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.ClienteID),
                         PesoAtual = animalTemp.PesoAtual,
                         AlturaAtual = animalTemp.AlturaAtual,
+                        DataNascimento = Convert.ToDateTime(animalTemp.DataNascimento),
                         Raca = animalTemp.Raca,
                         TempoDeVida = (string)json[0]["life_span"],
                         Temperamento = (string)json[0]["temperament"],
@@ -159,6 +161,7 @@ namespace PetShopManager.Controllers
                 AnimalParaAtualizar.Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.ClienteID) ?? AnimalParaAtualizar.Cliente;
                 AnimalParaAtualizar.PesoAtual = animalTemp.PesoAtual == 0 ? AnimalParaAtualizar.PesoAtual : animalTemp.PesoAtual;
                 AnimalParaAtualizar.AlturaAtual = animalTemp.AlturaAtual == 0 ? AnimalParaAtualizar.AlturaAtual : animalTemp.AlturaAtual;
+                if(animalTemp.DataNascimento != null) AnimalParaAtualizar.DataNascimento = Convert.ToDateTime(animalTemp.DataNascimento);
                 AnimalParaAtualizar.Raca = animalTemp.Raca ?? AnimalParaAtualizar.Raca;
 
                 if (AnimalParaAtualizar.Raca != null || AnimalParaAtualizar.Raca != "")
