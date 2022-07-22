@@ -51,6 +51,21 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [HttpGet("CachorroPorCliente/{idCliente}")]
+        public async Task<ActionResult> GetByCachorroPorCliente(int idCliente)
+        {
+            try
+            {
+                List<Animal> CachorroPorClientePesquisado = await _database.Animais.Where(cliente => cliente.Cliente.Id == idCliente).Include(cliente => cliente.Cliente).ToListAsync();
+
+                return Ok(CachorroPorClientePesquisado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { msg = "Nenhum cliente encontrado com esse id", error = ex.Message });
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post(ClienteDTO clienteTemp)
         {

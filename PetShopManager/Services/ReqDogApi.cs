@@ -23,7 +23,7 @@ namespace PetShopManager.Services
             var response = (HttpWebResponse)req.GetResponse();
             var dataStream = response.GetResponseStream();
             var reader = new StreamReader(dataStream);            
-            return reader.ReadToEnd();
+            return await reader.ReadToEndAsync();
         }    
 
         public async Task<string> GetRandomDogs()
@@ -39,7 +39,7 @@ namespace PetShopManager.Services
             var response = (HttpWebResponse)req.GetResponse();
             var dataStream = response.GetResponseStream();
             var reader = new StreamReader(dataStream);            
-            return reader.ReadToEnd();
+            return await reader.ReadToEndAsync();
         }     
     }
 }

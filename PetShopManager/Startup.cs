@@ -1,10 +1,13 @@
 using System;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PetShopManager.Data;
 
@@ -24,8 +27,25 @@ namespace PetShopManager
         {
             string mySqlConnection = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContextPool<ApplicationDbContext>(options => 
-            options.UseMySql(mySqlConnection,ServerVersion.AutoDetect(mySqlConnection)));
+            services.AddDbContextPool<ApplicationDbContext>(options =>
+            options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+
+            var chaveDeSeguranca = "minhasenhasecreta";
+            var chaveSimetrica = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(chaveDeSeguranca));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+                options.TokenValidationParameters = new TokenValidationParameters{
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+
+                    //Dados de validação
+                    ValidIssuer = "PetShopManager.com",
+                    ValidAudience = "usuario_comum",
+                    IssuerSigningKey = chaveSimetrica
+                };
+            });
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

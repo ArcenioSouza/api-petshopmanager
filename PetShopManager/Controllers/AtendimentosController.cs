@@ -113,8 +113,7 @@ namespace PetShopManager.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(AtendimentoDTO atendimentoTemp)
         {
-            try
-            {
+            try{
                 Animal AnimalTemp = await _database.Animais.FirstAsync(animal => animal.Id == atendimentoTemp.AnimalId);
                 Funcionario FuncionarioTemp = await _database.Funcionarios.Include(cargo => cargo.Cargo).FirstAsync(funcionario => funcionario.Id == atendimentoTemp.FuncionarioId);
                 Servico ServicoTemp = await _database.Servicos.FirstAsync(servico => servico.Id == atendimentoTemp.ServicoId);

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZO1Ofx+UBM25xwDVT6XSNRbcZLisQuTiqC50AIRE7AbM2x+A3Pz5HhsF5hDgdb8EX3/tGwraJnAvsldZBKr5Cg==",
+  "dgSpecHash": "RNaAZ81TveemUcmG7c4ROaVZgPzTXh5KWNjH5sp9R6xbt0egXip3XxxuSCPqxvUmwMW0djOqmogf9jb6k2cA1g==",
   "success": true,
   "projectFilePath": "C:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\PetShopManager\\PetShopManager.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "C:\\Users\\AOZI\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.7.1\\microsoft.identitymodel.tokens.6.7.1.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\mysqlconnector\\1.3.13\\mysqlconnector.1.3.13.nupkg.sha512",
+    "C:\\Users\\AOZI\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\5.0.4\\pomelo.entityframeworkcore.mysql.5.0.4.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
