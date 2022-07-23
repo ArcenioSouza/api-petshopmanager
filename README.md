@@ -569,6 +569,17 @@ Nosso banco de dados já possui dois usuários cadastrados com diferentes permis
 # Imagens do processo de organização e criação do projeto
 
 <details>
-<summary>🖼️ Backlog do projeto</summary>
+<summary>🖼️ <b>Backlog do projeto</b></summary>
 <img src="./assets/img/Trello1.JPG" width="900px">
+</details>
+<br>
+<details>
+<summary>🖼️ <b>EndPoints do projeto</b></summary>
+<img src="./assets/img/Animais.JPG" width="900px">
+<img src="./assets/img/Atendimentos.JPG" width="900px">
+<img src="./assets/img/Cargos.JPG" width="900px">
+<img src="./assets/img/Clientes.JPG" width="900px">
+<img src="./assets/img/Funcionarios.JPG" width="900px">
+<img src="./assets/img/Logins.JPG" width="900px">
+<img src="./assets/img/Servicos.JPG" width="900px">
 </details>
