@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace PetShopManager.Controllers
             _database = database;
         }
 
+        [Authorize(Roles = "Funcionario")]
         [HttpGet]
         public async Task<ActionResult> Get()
         {
@@ -38,6 +40,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("Cliente/BuscaPorId/{id}")]
         public async Task<ActionResult> GetByIdCliente(int id)
         {
@@ -55,6 +58,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("Cliente/Busca/{nome}/{cpf}")]
         public async Task<ActionResult> GetByNomeCliente(string nome, string cpf)
         {
@@ -74,6 +78,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("Animal/BuscaPorId/{id}")]
         public async Task<ActionResult> GetByIdAnimal(int id)
         {
@@ -91,6 +96,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("Animal/Busca/{Nome}/{DataNascimento}")]
         public async Task<ActionResult> GetByNomeAnimal(string Nome, string DataNascimento)
         {
@@ -110,6 +116,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Funcionario")]
         [HttpPost]
         public async Task<ActionResult> Post(AtendimentoDTO atendimentoTemp)
         {
@@ -146,6 +153,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Funcionario")]
         [HttpPatch("{id}")]
         public async Task<ActionResult> Patch(int id, AtendimentoPatchDTO atendimentoTemp)
         {

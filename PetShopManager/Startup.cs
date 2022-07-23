@@ -30,6 +30,8 @@ namespace PetShopManager
             services.AddDbContextPool<ApplicationDbContext>(options =>
             options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
+            services.AddCors();
+
             var chaveDeSeguranca = "minhasenhasecreta";
             var chaveSimetrica = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(chaveDeSeguranca));
 
@@ -83,15 +85,22 @@ namespace PetShopManager
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger(o => o.SerializeAsV2 = true);
+                app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PetShopManager v1"));
             }
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(cors => cors.AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .AllowAnyOrigin());
+
 
             app.UseEndpoints(endpoints =>
             {

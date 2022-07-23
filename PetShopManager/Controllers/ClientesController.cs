@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace PetShopManager.Controllers
             _database = database;
         }
 
+        [Authorize(Roles = "Funcionario")]
         [HttpGet]
         public async Task<ActionResult> Get()
         {
@@ -36,6 +38,8 @@ namespace PetShopManager.Controllers
             }
 
         }
+
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
@@ -51,6 +55,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("CachorroPorCliente/{idCliente}")]
         public async Task<ActionResult> GetByCachorroPorCliente(int idCliente)
         {
@@ -66,6 +71,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpPost]
         public async Task<ActionResult> Post(ClienteDTO clienteTemp)
         {
@@ -94,6 +100,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpPatch("{id}")]
         public async Task<ActionResult> Patch(int id, ClienteDTO clienteTemp)
         {
@@ -116,7 +123,8 @@ namespace PetShopManager.Controllers
                 return BadRequest(new { erro = ex.Message });
             }
         }
-        
+
+        [Authorize(Roles = "Funcionario")]        
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

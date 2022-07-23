@@ -1,3 +1,4 @@
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using PetShopManager.Services;
 using Newtonsoft.Json.Linq;
 using PetShopManager.DTO;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PetShopManager.Controllers
 {
@@ -22,7 +24,8 @@ namespace PetShopManager.Controllers
         {
             _database = database;
         }
-
+        
+        [Authorize(Roles = "Funcionario")]
         [HttpGet]
         public async Task<ActionResult> Get()
         {
@@ -37,6 +40,8 @@ namespace PetShopManager.Controllers
                 return BadRequest(new { erro = ex.Message });
             }
         }
+
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
@@ -52,6 +57,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("search/{raca}")]
         public async Task<ActionResult> GetRaca(string raca)
         {
@@ -74,6 +80,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpGet("random/dogs")]
         public async Task<ActionResult> GetDogsRandom()
         {
@@ -91,7 +98,8 @@ namespace PetShopManager.Controllers
                 return BadRequest(new { erro = ex.Message });
             }
         }
-
+        
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpPost]
         public async Task<ActionResult> Post(AnimalDTO animalTemp)
         {
@@ -149,6 +157,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Cliente, Funcionario")]
         [HttpPatch("{id}")]
         public async Task<ActionResult> Patch(int id, AnimalDTO animalTemp)
         {
@@ -190,6 +199,7 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Funcionario")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

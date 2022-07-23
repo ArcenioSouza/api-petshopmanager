@@ -215,7 +215,7 @@ namespace PetShopManager.Migrations
             //Cliente
             migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('1', 'Arcenio', '11111111111', '11999999999', 'arcenioneto@gmail.com', 'Arce@123', '1')");
             migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('2', 'Catarina', '22222222222', '11888888888', 'catarina@gmail.com', 'Cata@123', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('3', 'André', '33333333333', '11555555555', 'andre@gmail.com', 'Andre@123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('4', 'ClienteGFT', '44444444444', '11666666666', 'cliente@gft.com', 'ClienteGft123', '1')");
 
             //Cargo
             migrationBuilder.Sql(@"INSERT INTO `cargos` (`Id`, `NomeCargo`) VALUES ('1', 'Veterinário')");
