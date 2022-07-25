@@ -36,7 +36,7 @@ namespace PetShopManager.Controllers
 
                 await _database.Servicos.AddAsync(ServicoParaSalvar);
                 await _database.SaveChangesAsync();
-                return Ok(ServicoParaSalvar);
+                return Created("", ServicoParaSalvar);
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace PetShopManager.Controllers
 
                 _database.Servicos.Update(ServicoParaAtualizar);
                 await _database.SaveChangesAsync();
-                return Ok(ServicoParaAtualizar);
+                return Created("", ServicoParaAtualizar);
             }
             catch (Exception ex)
             {
