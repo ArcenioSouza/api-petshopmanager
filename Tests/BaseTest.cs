@@ -1,5 +1,5 @@
 using System;
-using locadoragft.Data;
+using PetShopManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,19 +26,19 @@ namespace Tests
             var serviceCollection = new ServiceCollection();
              string mySqlConnection = $"server=localhost;port=3306;database={dataBaseName};uid=root;password=Gftbrasil1705";
 
-            serviceCollection.AddDbContext<AppDbContext>(options =>
+            serviceCollection.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)), ServiceLifetime.Transient
             );
 
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
-            using var context = ServiceProvider.GetService<AppDbContext>();
+            using var context = ServiceProvider.GetService<ApplicationDbContext>();
             context.Database.EnsureCreated();
         }
 
         public void Dispose()
         {
-            using var context = ServiceProvider.GetService<AppDbContext>();
+            using var context = ServiceProvider.GetService<ApplicationDbContext>();
             context.Database.EnsureDeleted();
         }
     }

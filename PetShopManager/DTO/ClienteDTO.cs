@@ -16,6 +16,5 @@ namespace PetShopManager.DTO
         [Required(ErrorMessage = "Atributo {0} é obrigatório")]
         [DataType(DataType.Password)]
         public string Senha { get; set; }  
-        public bool IsActive { get; set; }   
     }
 }
