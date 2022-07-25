@@ -62,7 +62,7 @@ namespace PetShopManager.Controllers
 
                 await _database.Cargos.AddAsync(CargoParaSalvar);
                 await _database.SaveChangesAsync();
-                return Ok(CargoParaSalvar);
+                return Created("", CargoParaSalvar);
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace PetShopManager.Controllers
 
                 _database.Cargos.Update(CargoParaAtualizar);
                 await _database.SaveChangesAsync();
-                return Ok(CargoParaAtualizar);
+                return Created("", CargoParaAtualizar);
             }
             catch (Exception ex)
             {
