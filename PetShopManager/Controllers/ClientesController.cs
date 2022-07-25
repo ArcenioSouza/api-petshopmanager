@@ -13,13 +13,42 @@ using PetShopManager.Models;
 namespace PetShopManager.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/clientes")]
     public class ClientesController : ControllerBase
     {
         private readonly ApplicationDbContext _database;
         public ClientesController(ApplicationDbContext database)
         {
             _database = database;
+        }
+
+        [Authorize(Roles = "Cliente, Funcionario")]
+        [HttpPost]
+        public async Task<ActionResult> Post(ClienteDTO clienteTemp)
+        {
+            try
+            {
+                var clientes = _database.Clientes.ToList();
+                if (clientes.Exists(funcionario => funcionario.Cpf.Equals(clienteTemp.Cpf))) return StatusCode(StatusCodes.Status422UnprocessableEntity, "Cliente já cadastrado");
+
+                Cliente ClienteParaSalvar = new()
+                {
+                    Nome = clienteTemp.Nome,
+                    Cpf = clienteTemp.Cpf,
+                    Telefone = clienteTemp.Telefone,
+                    Email = clienteTemp.Email,
+                    Senha = clienteTemp.Senha,
+                    IsActive = true
+                };
+
+                await _database.Clientes.AddAsync(ClienteParaSalvar);
+                await _database.SaveChangesAsync();
+                return Ok(ClienteParaSalvar);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
         }
 
         [Authorize(Roles = "Funcionario")]
@@ -56,12 +85,12 @@ namespace PetShopManager.Controllers
         }
 
         [Authorize(Roles = "Cliente, Funcionario")]
-        [HttpGet("CachorroPorCliente/{idCliente}")]
-        public async Task<ActionResult> GetByCachorroPorCliente(int idCliente)
+        [HttpGet("animal/{id}")]
+        public async Task<ActionResult> GetByCachorroPorCliente(int id)
         {
             try
             {
-                List<Animal> CachorroPorClientePesquisado = await _database.Animais.Where(cliente => cliente.Cliente.Id == idCliente).Include(cliente => cliente.Cliente).ToListAsync();
+                List<Animal> CachorroPorClientePesquisado = await _database.Animais.Where(cliente => cliente.Cliente.Id == id).Include(cliente => cliente.Cliente).ToListAsync();
 
                 return Ok(CachorroPorClientePesquisado);
             }
@@ -72,36 +101,7 @@ namespace PetShopManager.Controllers
         }
 
         [Authorize(Roles = "Cliente, Funcionario")]
-        [HttpPost]
-        public async Task<ActionResult> Post(ClienteDTO clienteTemp)
-        {
-            try
-            {
-                var clientes = _database.Clientes.ToList();
-                if(clientes.Exists(funcionario => funcionario.Cpf.Equals(clienteTemp.Cpf))) return StatusCode(StatusCodes.Status422UnprocessableEntity, "Cliente já cadastrado");
-
-                Cliente ClienteParaSalvar = new()
-                {
-                    Nome = clienteTemp.Nome,
-                    Cpf = clienteTemp.Cpf,
-                    Telefone = clienteTemp.Telefone,
-                    Email = clienteTemp.Email,
-                    Senha = clienteTemp.Senha,
-                    IsActive = true
-                };
-
-                await _database.Clientes.AddAsync(ClienteParaSalvar);
-                await _database.SaveChangesAsync();
-                return Ok(ClienteParaSalvar);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { erro = ex.Message });
-            }
-        }
-
-        [Authorize(Roles = "Cliente, Funcionario")]
-        [HttpPatch("{id}")]
+        [HttpPatch("atualizar/{id}")]
         public async Task<ActionResult> Patch(int id, ClienteDTO clienteTemp)
         {
             try
@@ -124,8 +124,8 @@ namespace PetShopManager.Controllers
             }
         }
 
-        [Authorize(Roles = "Funcionario")]        
-        [HttpDelete("{id}")]
+        [Authorize(Roles = "Funcionario")]
+        [HttpDelete("deletar/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             try
