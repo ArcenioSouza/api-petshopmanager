@@ -12,7 +12,7 @@ using PetShopManager.Models;
 namespace PetShopManager.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/cargos")]
     [Authorize(Roles = "Funcionario")]
     public class CargosController : ControllerBase
     {
@@ -20,6 +20,26 @@ namespace PetShopManager.Controllers
         public CargosController(ApplicationDbContext database)
         {
             _database = database;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post(CargoDTO cargoTemp)
+        {
+            try
+            {
+                Cargo CargoParaSalvar = new()
+                {
+                    NomeCargo = cargoTemp.NomeCargo
+                };
+
+                await _database.Cargos.AddAsync(CargoParaSalvar);
+                await _database.SaveChangesAsync();
+                return Created("", CargoParaSalvar);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
         }
 
         [HttpGet]
@@ -50,28 +70,7 @@ namespace PetShopManager.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post(CargoDTO cargoTemp)
-        {
-            try
-            {
-                Cargo CargoParaSalvar = new()
-                {
-                    NomeCargo = cargoTemp.NomeCargo
-                };
-
-                await _database.Cargos.AddAsync(CargoParaSalvar);
-                await _database.SaveChangesAsync();
-                return Created("", CargoParaSalvar);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { erro = ex.Message });
-            }
-
-        }
-
-        [HttpPatch("{id}")]
+        [HttpPatch("atualizar/{id}")]
         public async Task<ActionResult> Patch(int id, CargoDTO cargoTemp)
         {
             try
@@ -89,7 +88,7 @@ namespace PetShopManager.Controllers
                 return BadRequest(new { erro = ex.Message });
             }
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("deletar/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             try
