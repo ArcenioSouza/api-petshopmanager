@@ -59,7 +59,7 @@ namespace PetShopManager.Controllers
                 else
                 {
                     Funcionario usuarioFuncionario = await _database.Funcionarios.FirstAsync(user => user.Email.Equals(email));
-                    if (usuarioFuncionario is null) return NotFound("Usuário cliente não encontrado");
+                    if (usuarioFuncionario is null) return NotFound("Usuário funcionario não encontrado");
                     if (usuarioFuncionario.Senha != senha) return BadRequest("Senha inválida");
 
                     var chaveDeSeguranca = "minhasenhasecreta";
@@ -69,7 +69,6 @@ namespace PetShopManager.Controllers
                     var claims = new List<Claim>();
                     claims.Add(new Claim("id", usuarioFuncionario.Id.ToString()));
                     claims.Add(new Claim("email", usuarioFuncionario.Email));
-                    claims.Add(new Claim("senha", usuarioFuncionario.Senha));
                     claims.Add(new Claim(ClaimTypes.Role, "Funcionario"));
 
 
