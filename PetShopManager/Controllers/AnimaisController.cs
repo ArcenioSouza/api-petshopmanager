@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace PetShopManager.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/animais")]
     public class AnimaisController : ControllerBase
     {
         private readonly ApplicationDbContext _database;
@@ -24,81 +24,7 @@ namespace PetShopManager.Controllers
         {
             _database = database;
         }
-        
-        [Authorize(Roles = "Funcionario")]
-        [HttpGet]
-        public async Task<ActionResult> Get()
-        {
-            try
-            {
-                List<Animal> ListaDeAnimais = await _database.Animais.Include(cliente => cliente.Cliente).Where(animal => animal.IsActive == true).ToListAsync();
-                if (ListaDeAnimais.Count == 0) return NotFound("Nenhum animal encontrado");
-                return Ok(ListaDeAnimais);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { erro = ex.Message });
-            }
-        }
 
-        [Authorize(Roles = "Cliente, Funcionario")]
-        [HttpGet("{id}")]
-        public async Task<ActionResult> GetById(int id)
-        {
-            try
-            {
-                Animal AnimalPesquisado = await _database.Animais.Include(cliente => cliente.Cliente).FirstAsync(animal => animal.Id == id);
-                if(AnimalPesquisado.IsActive == false) return Ok("O animal com esse id não está ativo");
-                return Ok(AnimalPesquisado);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(new { msg = "Nenhum animal encontrado com esse id", error = ex.Message });
-            }
-        }
-
-        [Authorize(Roles = "Cliente, Funcionario")]
-        [HttpGet("search/{raca}")]
-        public async Task<ActionResult> GetRaca(string raca)
-        {
-            try
-            {
-                var req = new ReqDogApi();
-                var response = await req.GetInfoDogs(raca);
-                JArray json = JArray.Parse(response);
-                if (json.Count == 0) return NotFound("Nenhuma raça encontrada");
-                List<string> racas = new();
-                foreach (var item in json)
-                {
-                    racas.Add((string)item["name"]);
-                }
-                return Ok(new { racas });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { erro = ex.Message });
-            }
-        }
-
-        [Authorize(Roles = "Cliente, Funcionario")]
-        [HttpGet("random/dogs")]
-        public async Task<ActionResult> GetDogsRandom()
-        {
-            try
-            {
-                var req = new ReqDogApi();
-                var response = await req.GetRandomDogs(); 
-
-                var jsonList = JsonConvert.DeserializeObject<List<Cachorros>>(response);               
-                Console.WriteLine(jsonList);                
-                return Ok(jsonList);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { erro = ex.Message });
-            }
-        }
-        
         [Authorize(Roles = "Cliente, Funcionario")]
         [HttpPost]
         public async Task<ActionResult> Post(AnimalDTO animalTemp)
@@ -157,8 +83,82 @@ namespace PetShopManager.Controllers
             }
         }
 
+        [Authorize(Roles = "Funcionario")]
+        [HttpGet]
+        public async Task<ActionResult> Get()
+        {
+            try
+            {
+                List<Animal> ListaDeAnimais = await _database.Animais.Include(cliente => cliente.Cliente).Where(animal => animal.IsActive == true).ToListAsync();
+                if (ListaDeAnimais.Count == 0) return NotFound("Nenhum animal encontrado");
+                return Ok(ListaDeAnimais);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+        }
+
         [Authorize(Roles = "Cliente, Funcionario")]
-        [HttpPatch("{id}")]
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(int id)
+        {
+            try
+            {
+                Animal AnimalPesquisado = await _database.Animais.Include(cliente => cliente.Cliente).FirstAsync(animal => animal.Id == id);
+                if (AnimalPesquisado.IsActive == false) return Ok("O animal com esse id não está ativo");
+                return Ok(AnimalPesquisado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { msg = "Nenhum animal encontrado com esse id", error = ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Cliente, Funcionario")]
+        [HttpGet("random/dogs")]
+        public async Task<ActionResult> GetDogsRandom()
+        {
+            try
+            {
+                var req = new ReqDogApi();
+                var response = await req.GetRandomDogs();
+
+                var jsonList = JsonConvert.DeserializeObject<List<Cachorros>>(response);
+                Console.WriteLine(jsonList);
+                return Ok(jsonList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Cliente, Funcionario")]
+        [HttpGet("search/{raca}")]
+        public async Task<ActionResult> GetRaca(string raca)
+        {
+            try
+            {
+                var req = new ReqDogApi();
+                var response = await req.GetInfoDogs(raca);
+                JArray json = JArray.Parse(response);
+                if (json.Count == 0) return NotFound("Nenhuma raça encontrada");
+                List<string> racas = new();
+                foreach (var item in json)
+                {
+                    racas.Add((string)item["name"]);
+                }
+                return Ok(new { racas });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Cliente, Funcionario")]
+        [HttpPatch("atualizar/{id}")]
         public async Task<ActionResult> Patch(int id, AnimalDTO animalTemp)
         {
             try
@@ -170,7 +170,7 @@ namespace PetShopManager.Controllers
                 AnimalParaAtualizar.Cliente = _database.Clientes.First(cliente => cliente.Id == animalTemp.ClienteID) ?? AnimalParaAtualizar.Cliente;
                 AnimalParaAtualizar.PesoAtual = animalTemp.PesoAtual == 0 ? AnimalParaAtualizar.PesoAtual : animalTemp.PesoAtual;
                 AnimalParaAtualizar.AlturaAtual = animalTemp.AlturaAtual == 0 ? AnimalParaAtualizar.AlturaAtual : animalTemp.AlturaAtual;
-                if(animalTemp.DataNascimento != null) AnimalParaAtualizar.DataNascimento = Convert.ToDateTime(animalTemp.DataNascimento);
+                if (animalTemp.DataNascimento != null) AnimalParaAtualizar.DataNascimento = Convert.ToDateTime(animalTemp.DataNascimento);
                 AnimalParaAtualizar.Raca = animalTemp.Raca ?? AnimalParaAtualizar.Raca;
 
                 if (AnimalParaAtualizar.Raca != null || AnimalParaAtualizar.Raca != "")
@@ -200,7 +200,7 @@ namespace PetShopManager.Controllers
         }
 
         [Authorize(Roles = "Funcionario")]
-        [HttpDelete("{id}")]
+        [HttpDelete("deletar/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             try
