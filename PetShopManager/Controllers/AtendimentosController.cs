@@ -155,7 +155,7 @@ namespace PetShopManager.Controllers
         }
 
         [Authorize(Roles = "Funcionario")]
-        [HttpPatch("{id}")]
+        [HttpPatch("atualizar/{id}")]
         public async Task<ActionResult> Patch(int id, AtendimentoPatchDTO atendimentoTemp)
         {
             try

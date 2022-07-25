@@ -13,7 +13,7 @@ using PetShopManager.Models;
 namespace PetShopManager.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/funcionarios")]
     [Authorize(Roles = "Funcionario")]
     public class FuncionariosController : ControllerBase
     {
@@ -23,34 +23,6 @@ namespace PetShopManager.Controllers
             _database = database;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Get()
-        {
-            try
-            {
-                List<Funcionario> ListaDeFuncionarios = await _database.Funcionarios.Where(funcionario => funcionario.IsActive == true).ToListAsync();
-                if (ListaDeFuncionarios.Count == 0) return NotFound("Nenhum funcionario encontrado");
-                return Ok(ListaDeFuncionarios);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { erro = ex.Message });
-            }
-        }
-        [HttpGet("{id}")]
-        public async Task<ActionResult> GetById(int id)
-        {
-            try
-            {
-                Funcionario FuncionarioPesquisado = await _database.Funcionarios.FirstAsync(funcionario => funcionario.Id == id);
-
-                return Ok(FuncionarioPesquisado);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(new { msg = "Nenhum funcionario encontrado com esse id", error = ex.Message });
-            }
-        }
         [HttpPost]
         public async Task<ActionResult> Post(FuncionarioDTO funcionarioTemp)
         {
@@ -78,7 +50,37 @@ namespace PetShopManager.Controllers
             }
         }
 
-        [HttpPatch("{id}")]
+        [HttpGet]
+        public async Task<ActionResult> Get()
+        {
+            try
+            {
+                List<Funcionario> ListaDeFuncionarios = await _database.Funcionarios.Where(funcionario => funcionario.IsActive == true).ToListAsync();
+                if (ListaDeFuncionarios.Count == 0) return NotFound("Nenhum funcionario encontrado");
+                return Ok(ListaDeFuncionarios);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(int id)
+        {
+            try
+            {
+                Funcionario FuncionarioPesquisado = await _database.Funcionarios.FirstAsync(funcionario => funcionario.Id == id);
+
+                return Ok(FuncionarioPesquisado);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { msg = "Nenhum funcionario encontrado com esse id", error = ex.Message });
+            }
+        }
+
+        [HttpPatch("atualizar/{id}")]
         public async Task<ActionResult> Patch(int id, FuncionarioDTO funcionarioTemp)
         {
             try
@@ -100,7 +102,7 @@ namespace PetShopManager.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("deletar/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
              try
