@@ -12,7 +12,7 @@ using PetShopManager.Models;
 namespace PetShopManager.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/servicos")]
     [Authorize(Roles = "Funcionario")]
     public class ServicosController : ControllerBase
     {
@@ -20,6 +20,28 @@ namespace PetShopManager.Controllers
         public ServicosController(ApplicationDbContext database)
         {
             _database = database;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post(ServicoDTO servicoTemp)
+        {
+            try
+            {
+                Servico ServicoParaSalvar = new()
+                {
+                    Tipo = servicoTemp.Tipo,
+                    Valor = servicoTemp.Valor,
+                    IsActive = true
+                };
+
+                await _database.Servicos.AddAsync(ServicoParaSalvar);
+                await _database.SaveChangesAsync();
+                return Ok(ServicoParaSalvar);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
         }
 
         [HttpGet]
@@ -52,29 +74,7 @@ namespace PetShopManager.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post(ServicoDTO servicoTemp)
-        {
-            try
-            {
-                Servico ServicoParaSalvar = new()
-                {
-                    Tipo = servicoTemp.Tipo,
-                    Valor = servicoTemp.Valor,
-                    IsActive = true
-                };
-
-                await _database.Servicos.AddAsync(ServicoParaSalvar);
-                await _database.SaveChangesAsync();
-                return Ok(ServicoParaSalvar);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { erro = ex.Message });
-            }
-        }
-
-        [HttpPatch("{id}")]
+        [HttpPatch("atualizar/{id}")]
         public async Task<ActionResult> Patch(int id, ServicoDTO servicoTemp)
         {
             try
@@ -94,7 +94,7 @@ namespace PetShopManager.Controllers
             }
         }
         
-        [HttpDelete("{id}")]
+        [HttpDelete("deletar/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             try

@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 namespace PetShopManager.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/logins")]
     public class LoginsController : ControllerBase
     {
         private readonly ApplicationDbContext _database;
