@@ -38,6 +38,7 @@ namespace Tests
             Assert.Equal(200, result.StatusCode);
         }
     }
+
     public class GetByIdCargosTest : BaseTest, IClassFixture<DbTeste>
     {
         private readonly ServiceProvider _serviceProvide;
@@ -133,7 +134,7 @@ namespace Tests
             Assert.Equal(201, result.StatusCode);
         }
     }
-
+    
     public class DeleteCargosTest : BaseTest, IClassFixture<DbTeste>
     {
         private readonly ServiceProvider _serviceProvide;

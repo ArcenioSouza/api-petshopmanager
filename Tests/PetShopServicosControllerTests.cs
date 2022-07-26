@@ -39,6 +39,7 @@ namespace Tests
             Assert.Equal(200, result.StatusCode);
         }
     }
+
     public class GetByIdServicosTest : BaseTest, IClassFixture<DbTeste>
     {
         private readonly ServiceProvider _serviceProvide;
@@ -100,7 +101,7 @@ namespace Tests
             Assert.Equal(201, result.StatusCode);
         }
     }
-
+    
     public class PatchServicosTest : BaseTest, IClassFixture<DbTeste>
     {
         private readonly ServiceProvider _serviceProvide;
@@ -138,7 +139,7 @@ namespace Tests
             Assert.Equal(201, result.StatusCode);
         }
     }
-
+    
     public class DeleteServicosTest : BaseTest, IClassFixture<DbTeste>
     {
         private readonly ServiceProvider _serviceProvide;
