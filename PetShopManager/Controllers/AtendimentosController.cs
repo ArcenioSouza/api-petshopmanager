@@ -52,7 +52,7 @@ namespace PetShopManager.Controllers
                 await _database.Atendimentos.AddAsync(AtendimentoParaSalvar);
                 await _database.SaveChangesAsync();
 
-                return Ok(AtendimentoParaSalvar);
+                return Created("", AtendimentoParaSalvar);
             }
             catch (Exception ex)
             {
@@ -169,7 +169,7 @@ namespace PetShopManager.Controllers
                 _database.Atendimentos.Update(AtendimentoParaAtualizar);
                 await _database.SaveChangesAsync();
 
-                return Ok("Informações sobre atendimento atualizado");
+                return Created("", AtendimentoParaAtualizar);
             }
             catch (Exception ex)
             {
