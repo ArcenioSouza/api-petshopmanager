@@ -42,7 +42,7 @@ namespace PetShopManager.Controllers
 
                 await _database.Funcionarios.AddAsync(FuncionarioParaSalvar);
                 await _database.SaveChangesAsync();
-                return Ok(FuncionarioParaSalvar);
+                return Created("", FuncionarioParaSalvar);
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace PetShopManager.Controllers
 
                 _database.Funcionarios.Update(FuncionarioParaAtualizar);
                 await _database.SaveChangesAsync();
-                return Ok(FuncionarioParaAtualizar);
+                return Created("", FuncionarioParaAtualizar);
             }
             catch (Exception ex)
             {
