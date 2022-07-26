@@ -18,7 +18,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os animais cadastrados**
 
 ```http
-  GET - https://localhost:5001/api/v1/Animais
+  GET - https://localhost:5001/api/v1/animais
 ```
 
 <hr><br>
@@ -26,7 +26,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna somente 1 animal cadastrado**
 
 ```http
-  GET - https://localhost:5001/api/v1/Animais/{id}
+  GET - https://localhost:5001/api/v1/animais/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -38,7 +38,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna detalhes da raça pesquisada**
 
 ```http
-  GET - https://localhost:5001/api/v1/Animais/search/{raca}
+  GET - https://localhost:5001/api/v1/animais/search/{raca}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -50,7 +50,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Cria um registro de animal no banco**
 
 ```http
-  POST - https://localhost:5001/api/v1/Animais
+  POST - https://localhost:5001/api/v1/animais
 ```
 
 | Parametro        | Tipo     | Descrição                                   |
@@ -68,7 +68,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Atualiza um registro de animal no banco**
 
 ```http
-  PATCH - https://localhost:5001/api/v1/Animais/{id}
+  PATCH - https://localhost:5001/api/v1/animais/atualizar/{id}
 ```
 
 | Parametro        | Tipo     | Descrição                                   |
@@ -87,7 +87,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Exclui 1 animal cadastrado**
 
 ```http
-  DELETE - https://localhost:5001/api/v1/Animais/{id}
+  DELETE - https://localhost:5001/api/v1/animais/deletar/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -104,7 +104,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os cargos cadastrados**
 
 ```http
-  GET - https://localhost:5001/api/v1/Cargos
+  GET - https://localhost:5001/api/v1/cargos
 ```
 
 <hr><br>
@@ -112,7 +112,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna somente 1 cargo cadastrado**
 
 ```http
-  GET - https://localhost:5001/api/v1/Cargos/{id}
+  GET - https://localhost:5001/api/v1/cargos/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -124,7 +124,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Cria um registro de cargo no banco**
 
 ```http
-  POST - https://localhost:5001/api/v1/Cargos
+  POST - https://localhost:5001/api/v1/cargos
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -136,7 +136,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Atualiza um registro de cargo no banco**
 
 ```http
-  PATCH - https://localhost:5001/api/v1/Cargos/{id}
+  PATCH - https://localhost:5001/api/v1/cargos/atualizar/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -149,7 +149,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Exclui 1 cargo cadastrado**
 
 ```http
-  DELETE - https://localhost:5001/api/v1/Cargos/{id}
+  DELETE - https://localhost:5001/api/v1/cargos/deletar/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -166,7 +166,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os servicos cadastrados**
 
 ```http
-  GET - https://localhost:5001/api/v1/Servicos
+  GET - https://localhost:5001/api/v1/servicos
 ```
 
 <hr><br>
@@ -174,7 +174,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna somente 1 servico cadastrado**
 
 ```http
-  GET - https://localhost:5001/api/v1/Servicos/{id}
+  GET - https://localhost:5001/api/v1/servicos/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -186,7 +186,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Cria um registro de servico no banco**
 
 ```http
-  POST - https://localhost:5001/api/v1/Servicos
+  POST - https://localhost:5001/api/v1/servicos
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -199,7 +199,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Atualiza um registro de servico no banco**
 
 ```http
-  PATCH - https://localhost:5001/api/v1/Servicos/{id}
+  PATCH - https://localhost:5001/api/v1/servicos/atualizar/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -213,7 +213,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Exclui 1 servico cadastrado**
 
 ```http
-  DELETE - https://localhost:5001/api/v1/Servicos/{id}
+  DELETE - https://localhost:5001/api/v1/servicos/deletar/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -230,7 +230,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os funcionarios cadastrados**
 
 ```http
-  GET - https://localhost:5001/api/v1/Funcionarios
+  GET - https://localhost:5001/api/v1/funcionarios
 ```
 
 <hr><br>
@@ -238,7 +238,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna somente 1 funcionario cadastrado**
 
 ```http
-  GET - https://localhost:5001/api/v1/Funcionarios/{id}
+  GET - https://localhost:5001/api/v1/funcionarios/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -250,7 +250,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Cria um registro de funcionario no banco**
 
 ```http
-  POST - https://localhost:5001/api/v1/Funcionarios
+  POST - https://localhost:5001/api/v1/funcionarios
 ```
 
 | Parametro | Tipo     | Descrição                                 |
@@ -266,7 +266,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Atualiza um registro de funcionario no banco**
 
 ```http
-  PATCH - https://localhost:5001/api/v1/Funcionarios/{id}
+  PATCH - https://localhost:5001/api/v1/funcionarios/atualizar/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -283,7 +283,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Exclui 1 funcionario cadastrado**
 
 ```http
-  DELETE - https://localhost:5001/api/v1/Funcionarios/{id}
+  DELETE - https://localhost:5001/api/v1/funcionarios/deletar/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -300,7 +300,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os clientes cadastrados**
 
 ```http
-  GET - https://localhost:5001/api/v1/Clientes
+  GET - https://localhost:5001/api/v1/clientes
 ```
 
 <hr><br>
@@ -308,19 +308,19 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os cachorros do cliente cadastrado**
 
 ```http
-  GET - https://localhost:5001/api/v1/Clientes/CachorroPorCliente/{idCliente}
+  GET - https://localhost:5001/api/v1/clientes/animal/{id}
 ```
 
 | Parametro   | Tipo     | Descrição                          |
 | :---------- | :------- | :--------------------------------- |
-| `idCliente` | `int`    | **Requerido**. Id do cliente       |
+| `id`        | `int`    | **Requerido**. Id do cliente       |
 
 <hr><br>
 
 ### 👉 **Retorna somente 1 cliente cadastrado**
 
 ```http
-  GET - https://localhost:5001/api/v1/Clientes/{id}
+  GET - https://localhost:5001/api/v1/clientes/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -332,7 +332,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Cria um registro de cliente no banco**
 
 ```http
-  POST - https://localhost:5001/api/v1/Clientes
+  POST - https://localhost:5001/api/v1/clientes
 ```
 
 | Parametro  | Tipo     | Descrição                           |
@@ -348,7 +348,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Atualiza um registro de cliente no banco**
 
 ```http
-  PATCH - https://localhost:5001/api/v1/Clientes/{id}
+  PATCH - https://localhost:5001/api/v1/clientes/atualizar/{id}
 ```
 
 | Parametro  | Tipo     | Descrição                      |
@@ -365,7 +365,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Exclui 1 cliente cadastrado**
 
 ```http
-  DELETE - https://localhost:5001/api/v1/Clientes/{id}
+  DELETE - https://localhost:5001/api/v1/clientes/deletar/{id}
 ```
 
 | Parametro | Tipo     | Descrição                          |
@@ -382,7 +382,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os atendimentos cadastrados**
 
 ```http
-  GET - https://localhost:5001/api/v1/Atendimentos
+  GET - https://localhost:5001/api/v1/atendimentos
 ```
 
 <hr><br>
@@ -390,7 +390,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os atendimentos do cliente cadastrado buscando por Id**
 
 ```http
-  GET - https://localhost:5001/api/v1/Atendimentos/Cliente/BuscaPorId/{id}
+  GET - https://localhost:5001/api/v1/atendimentos/cliente/busca/{id}
 ```
 
 | Parametro   | Tipo     | Descrição                          |
@@ -402,7 +402,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os atendimentos do cliente cadastrado buscando por nome e cpf**
 
 ```http
-  GET - https://localhost:5001/api/v1/Atendimentos/Cliente/Busca/{nome}/{cpf}
+  GET - https://localhost:5001/api/v1/atendimentos/cliente/busca/{nome}/{cpf}
 ```
 
 | Parametro   | Tipo     | Descrição                          |
@@ -415,7 +415,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os atendimentos do animal cadastrado buscando por Id**
 
 ```http
-  GET - https://localhost:5001/api/v1/Atendimentos/Animal/BuscaPorId/{id}
+  GET - https://localhost:5001/api/v1/atendimentos/animal/busca/{id}
 ```
 
 | Parametro   | Tipo     | Descrição                          |
@@ -427,20 +427,20 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Retorna todos os atendimentos do animal cadastrado buscando por nome e data de nascimento**
 
 ```http
-  GET - https://localhost:5001/api/v1/Atendimentos/Animal/Busca/{Nome}/{DataNascimento}
+  GET - https://localhost:5001/api/v1/atendimentos/animal/busca/{nome}/{nascimento}
 ```
 
 | Parametro         | Tipo      | Descrição                                   |
 | :---------------- | :-------- | :------------------------------------------ |
 | `nome`            | `string`  | **Requerido**. Nome do animal               |
-| `dataNascimento`  | `string`  | **Requerido**. Data de nascimento do animal |
+| `nascimento`      | `string`  | **Requerido**. Data de nascimento do animal |
 
 <hr><br>
 
 ### 👉 **Cria um registro de atendimento no banco**
 
 ```http
-  POST - https://localhost:5001/api/v1/Atendimentos
+  POST - https://localhost:5001/api/v1/atendimentos
 ```
 
 | Parametro                   | Tipo     | Descrição                               |
@@ -459,7 +459,7 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 ### 👉 **Atualiza um registro de atendimento no banco**
 
 ```http
-  PATCH - https://localhost:5001/api/v1/Atendimentos/{id}
+  PATCH - https://localhost:5001/api/v1/atendimentos/atualizar/{id}
 ```
 
 | Parametro                   | Tipo     | Descrição                               |
