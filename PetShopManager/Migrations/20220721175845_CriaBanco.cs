@@ -215,7 +215,7 @@ namespace PetShopManager.Migrations
             //Cliente
             migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('1', 'Arcenio', '11111111111', '11999999999', 'arcenioneto@gmail.com', 'Arce@123', '1')");
             migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('2', 'Catarina', '22222222222', '11888888888', 'catarina@gmail.com', 'Cata@123', '1')");
-            migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('4', 'ClienteGFT', '44444444444', '11666666666', 'cliente@gft.com', 'ClienteGft123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `clientes` (`Id`, `Nome`, `Cpf`, `Telefone`, `Email`, `Senha`, `IsActive`) VALUES ('4', 'ClienteGFT', '44444444444', '11666666666', 'cliente@gft.com', 'Gft@1234', '1')");
 
             //Cargo
             migrationBuilder.Sql(@"INSERT INTO `cargos` (`Id`, `NomeCargo`) VALUES ('1', 'Veterinário')");
@@ -224,7 +224,7 @@ namespace PetShopManager.Migrations
             migrationBuilder.Sql(@"INSERT INTO `cargos` (`Id`, `NomeCargo`) VALUES ('4', 'Tosador')");
 
             //Funcionario
-            migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('1', 'João', '11111111111', '1', 'joao@gmail.com', 'Joao@123', '1')");
+            migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('1', 'FuncionarioGFT', '11111111111', '1', 'funcionario@gft.com', 'Gft@1234', '1')");
             migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('2', 'Maria', '22222222222', '2', 'maria@gmail.com', 'Maria@123', '1')");
             migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('3', 'Pedro', '33333333333', '3', 'pedro@gmail.com', 'Pedro@123', '1')");
             migrationBuilder.Sql(@"INSERT INTO `funcionarios` (`Id`, `Nome`, `Cpf`, `CargoId`, `Email`, `Senha`, `IsActive`) VALUES ('4', 'Caio', '44444444444', '4', 'caio@gmail.com', 'Caio@123', '1')");
