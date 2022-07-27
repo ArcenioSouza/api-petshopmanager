@@ -474,17 +474,18 @@ Esse sistema ainda conta com serviços de segurança de acesso, para consumir da
 
 # 🧰 Como utilizar
 
-1 - Abra seu terminal e clone o repositório usando esse comando:
+**1 -** Abra seu terminal e clone o repositório usando esse comando:
 - git clone https://git.gft.com/aozi/desafiopetshopmanager.git
 
-2 - Entre na pasta do projeto clonado:
-- cd desafiopetshopmanager
+**2 -** No diretório **PetShopManager/appsettings.json** altere a propriedade `DefaultConnection` com os dados do seu banco de dados MySQL;
 
-3 - Dentro da pasta do projeto, execute esses dois comandos: 
+**3 -** No diretório **Tests/BaseTest.cs** altere o valor da variável `mySqlConnection` com os dados do seu banco de dados MySQL;
+
+**4 -** Dentro da pasta do projeto, execute esses dois comandos: 
 - dotnet ef database update (Carrega o migration criando e populando o banco de dados) 
 - dotnet run --project PetShopManager (Executa a aplicação)
 
-Para rodar os testes, execute esse comando:
+**5 -** Para rodar os testes, execute esse comando:
 - dotnet test
 
 Nosso banco de dados já possui dois usuários cadastrados com diferentes permissões:
