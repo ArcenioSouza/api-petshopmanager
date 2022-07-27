@@ -5,82 +5,22 @@ using System.Threading.Tasks;
 using PetShopManager.Data;
 using PetShopManager.Controllers;
 using PetShopManager.DTO;
+using Xunit.Priority;
 
 namespace Tests
 {
-    public class GetCargosTest : BaseTest, IClassFixture<DbTeste>
+    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
+    public class CargosControllerTests : BaseTest, IClassFixture<DbTeste>
     {
         private readonly ServiceProvider _serviceProvide;
 
-        public GetCargosTest(DbTeste dbTeste)
+        public CargosControllerTests(DbTeste dbTeste)
         {
             _serviceProvide = dbTeste.ServiceProvider;
         }
 
-        [Fact]
-        public async Task GetCargos_RetornaStatusCode200()
-        {
-            using var context = _serviceProvide.GetService<ApplicationDbContext>();
-
-            CargosController controllerCargo = new(context);
-
-            CargoDTO Cargo = new()
-            {
-                NomeCargo = "TesteNomeCargo",
-            };
-
-            var _registroCargoCriado = await controllerCargo.Post(Cargo);
-
-            var _getRegistroCargo = await controllerCargo.Get();
-
-            OkObjectResult result = _getRegistroCargo as OkObjectResult;
-
-            Assert.Equal(200, result.StatusCode);
-        }
-    }
-
-    public class GetByIdCargosTest : BaseTest, IClassFixture<DbTeste>
-    {
-        private readonly ServiceProvider _serviceProvide;
-
-        public GetByIdCargosTest(DbTeste dbTeste)
-        {
-            _serviceProvide = dbTeste.ServiceProvider;
-        }
-
-        [Fact]
-        public async Task GetByIdCargos_RetornaStatusCode200()
-        {
-            using var context = _serviceProvide.GetService<ApplicationDbContext>();
-
-            CargosController controllerCargo = new(context);
-
-            CargoDTO Cargo = new()
-            {
-                NomeCargo = "TesteNomeCargo",
-            };
-
-            var _registroCargoCriado = await controllerCargo.Post(Cargo);
-
-            var _getRegistroCargo = await controllerCargo.GetById(1);
-
-            OkObjectResult result = _getRegistroCargo as OkObjectResult;
-
-            Assert.Equal(200, result.StatusCode);
-        }
-    }
-
-    public class PostCargosTest : BaseTest, IClassFixture<DbTeste>
-    {
-        private readonly ServiceProvider _serviceProvide;
-
-        public PostCargosTest(DbTeste dbTeste)
-        {
-            _serviceProvide = dbTeste.ServiceProvider;
-        }
-
-        [Fact]
-        public async Task PostCargos_RetornaStatusCode201()
+        [Fact, Priority(1)]
+        public async Task Post_RetornaStatusCode201()
         {
             using var context = _serviceProvide.GetService<ApplicationDbContext>();
 
@@ -97,35 +37,46 @@ namespace Tests
 
             Assert.Equal(201, result.StatusCode);
         }
-    }
 
-    public class PatchCargosTest : BaseTest, IClassFixture<DbTeste>
-    {
-        private readonly ServiceProvider _serviceProvide;
-
-        public PatchCargosTest(DbTeste dbTeste)
-        {
-            _serviceProvide = dbTeste.ServiceProvider;
-        }
-
-        [Fact]
-        public async Task PatchCargos_RetornaStatusCode201()
+        [Fact, Priority(2)]
+        public async Task Get_RetornaStatusCode200()
         {
             using var context = _serviceProvide.GetService<ApplicationDbContext>();
 
             CargosController controllerCargo = new(context);
 
-            CargoDTO Cargo = new()
-            {
-                NomeCargo = "TesteNomeCargo",
-            };
+            var _getRegistroCargo = await controllerCargo.Get();
+
+            OkObjectResult result = _getRegistroCargo as OkObjectResult;
+
+            Assert.Equal(200, result.StatusCode);
+        }
+
+        [Fact, Priority(3)]
+        public async Task GetById_RetornaStatusCode200()
+        {
+            using var context = _serviceProvide.GetService<ApplicationDbContext>();
+
+            CargosController controllerCargo = new(context);
+
+            var _getRegistroCargo = await controllerCargo.GetById(1);
+
+            OkObjectResult result = _getRegistroCargo as OkObjectResult;
+
+            Assert.Equal(200, result.StatusCode);
+        }
+
+        [Fact, Priority(4)]
+        public async Task Patch_RetornaStatusCode201()
+        {
+            using var context = _serviceProvide.GetService<ApplicationDbContext>();
+
+            CargosController controllerCargo = new(context);
 
             CargoDTO NovoCargo = new()
             {
                 NomeCargo = "TesteNomeCargoAtualizado",
             };
-
-            var _registroCargoCriado = await controllerCargo.Post(Cargo);
 
             var _registroCargoAtualizado = await controllerCargo.Patch(1, NovoCargo);
 
@@ -133,30 +84,13 @@ namespace Tests
 
             Assert.Equal(201, result.StatusCode);
         }
-    }
-    
-    public class DeleteCargosTest : BaseTest, IClassFixture<DbTeste>
-    {
-        private readonly ServiceProvider _serviceProvide;
 
-        public DeleteCargosTest(DbTeste dbTeste)
-        {
-            _serviceProvide = dbTeste.ServiceProvider;
-        }
-
-        [Fact]
-        public async Task DeleteCargos_RetornaStatusCode200()
+        [Fact, Priority(5)]
+        public async Task Delete_RetornaStatusCode200()
         {
             using var context = _serviceProvide.GetService<ApplicationDbContext>();
 
             CargosController controllerCargo = new(context);
-
-            CargoDTO Cargo = new()
-            {
-                NomeCargo = "TesteNomeCargo",
-            };
-
-            var _registroCargoCriado = await controllerCargo.Post(Cargo);
 
             var _registroDelete = await controllerCargo.Delete(1);
 

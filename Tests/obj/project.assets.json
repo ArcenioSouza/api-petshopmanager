@@ -1946,6 +1946,18 @@
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         }
       },
+      "Xunit.Priority/1.1.6": {
+        "type": "package",
+        "dependencies": {
+          "xunit.extensibility.core": "2.3.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Xunit.Priority.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Xunit.Priority.dll": {}
+        }
+      },
       "xunit.runner.visualstudio/2.4.3": {
         "type": "package",
         "build": {
@@ -6762,6 +6774,23 @@
         "xunit.extensibility.execution.nuspec"
       ]
     },
+    "Xunit.Priority/1.1.6": {
+      "sha512": "VF8yb6PHWb7ABkbEoWbesg0DsN3Pt7HQ2CGaIjyUh23jo3aCRm1zOAP/zQQh3B3Gi3K+5Xds8qs+SRUB2Hyr6Q==",
+      "type": "package",
+      "path": "xunit.priority/1.1.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/Xunit.Priority.dll",
+        "lib/net452/Xunit.Priority.xml",
+        "lib/netstandard1.1/Xunit.Priority.dll",
+        "lib/netstandard1.1/Xunit.Priority.xml",
+        "lib/netstandard2.0/Xunit.Priority.dll",
+        "lib/netstandard2.0/Xunit.Priority.xml",
+        "xunit.priority.1.1.6.nupkg.sha512",
+        "xunit.priority.nuspec"
+      ]
+    },
     "xunit.runner.visualstudio/2.4.3": {
       "sha512": "kZZSmOmKA8OBlAJaquPXnJJLM9RwQ27H7BMVqfMLUcTi9xHinWGJiWksa3D4NEtz0wZ/nxd2mogObvBgJKCRhQ==",
       "type": "package",
@@ -6804,6 +6833,7 @@
       "Microsoft.AspNetCore.TestHost >= 5.0.17",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "PetShopManager >= 1.0.0",
+      "Xunit.Priority >= 1.1.6",
       "coverlet.collector >= 3.0.2",
       "xunit >= 2.4.1",
       "xunit.runner.visualstudio >= 2.4.3"
@@ -6857,6 +6887,10 @@
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[16.9.4, )"
+          },
+          "Xunit.Priority": {
+            "target": "Package",
+            "version": "[1.1.6, )"
           },
           "coverlet.collector": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

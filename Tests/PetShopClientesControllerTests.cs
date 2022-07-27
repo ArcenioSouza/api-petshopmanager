@@ -5,90 +5,22 @@ using System.Threading.Tasks;
 using PetShopManager.Data;
 using PetShopManager.Controllers;
 using PetShopManager.DTO;
+using Xunit.Priority;
 
 namespace Tests
 {
-    public class GetClientesTest : BaseTest, IClassFixture<DbTeste>
+    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
+    public class ClientesControllerTests : BaseTest, IClassFixture<DbTeste>
     {
         private readonly ServiceProvider _serviceProvide;
 
-        public GetClientesTest(DbTeste dbTeste)
+        public ClientesControllerTests(DbTeste dbTeste)
         {
             _serviceProvide = dbTeste.ServiceProvider;
         }
 
-        [Fact]
-        public async Task GetClientes_RetornaStatusCode200()
-        {
-            using var context = _serviceProvide.GetService<ApplicationDbContext>();
-
-            ClientesController controllerCliente = new(context);
-
-            ClienteDTO Cliente = new()
-            {
-                Nome = "TesteNomeCliente",
-                Telefone = "11222222222",
-                Cpf = "11111111111",
-                Email = "teste@teste",
-                Senha = "testeSenha",
-            };
-
-            var _registroClienteCriado = await controllerCliente.Post(Cliente);
-
-            var _getRegistroCliente = await controllerCliente.Get();
-
-            OkObjectResult result = _getRegistroCliente as OkObjectResult;
-
-            Assert.Equal(200, result.StatusCode);
-        }
-    }
-
-    public class GetByIdClientesTest : BaseTest, IClassFixture<DbTeste>
-    {
-        private readonly ServiceProvider _serviceProvide;
-
-        public GetByIdClientesTest(DbTeste dbTeste)
-        {
-            _serviceProvide = dbTeste.ServiceProvider;
-        }
-
-        [Fact]
-        public async Task GetByIdClientes_RetornaStatusCode200()
-        {
-            using var context = _serviceProvide.GetService<ApplicationDbContext>();
-
-            ClientesController controllerCliente = new(context);
-
-            ClienteDTO Cliente = new()
-            {
-                Nome = "TesteNomeCliente",
-                Telefone = "11222222222",
-                Cpf = "11111111111",
-                Email = "teste@teste",
-                Senha = "testeSenha",
-            };
-
-            var _registroClienteCriado = await controllerCliente.Post(Cliente);
-
-            var _getRegistroCliente = await controllerCliente.GetById(1);
-
-            OkObjectResult result = _getRegistroCliente as OkObjectResult;
-
-            Assert.Equal(200, result.StatusCode);
-        }
-    }
-
-    public class PostClientesTest : BaseTest, IClassFixture<DbTeste>
-    {
-        private readonly ServiceProvider _serviceProvide;
-
-        public PostClientesTest(DbTeste dbTeste)
-        {
-            _serviceProvide = dbTeste.ServiceProvider;
-        }
-
-        [Fact]
-        public async Task PostClientes_RetornaStatusCode201()
+        [Fact, Priority(1)]
+        public async Task Post_RetornaStatusCode201()
         {
             using var context = _serviceProvide.GetService<ApplicationDbContext>();
 
@@ -109,32 +41,41 @@ namespace Tests
 
             Assert.Equal(201, result.StatusCode);
         }
-    }
 
-    public class PatchClientesTest : BaseTest, IClassFixture<DbTeste>
-    {
-        private readonly ServiceProvider _serviceProvide;
-
-        public PatchClientesTest(DbTeste dbTeste)
-        {
-            _serviceProvide = dbTeste.ServiceProvider;
-        }
-
-        [Fact]
-        public async Task PatchClientes_RetornaStatusCode201()
+        [Fact, Priority(2)]
+        public async Task Get_RetornaStatusCode200()
         {
             using var context = _serviceProvide.GetService<ApplicationDbContext>();
 
             ClientesController controllerCliente = new(context);
 
-            ClienteDTO Cliente = new()
-            {
-                Nome = "TesteNomeCliente",
-                Telefone = "11222222222",
-                Cpf = "11111111111",
-                Email = "teste@teste",
-                Senha = "testeSenha",
-            };
+            var _getRegistroCliente = await controllerCliente.Get();
+
+            OkObjectResult result = _getRegistroCliente as OkObjectResult;
+
+            Assert.Equal(200, result.StatusCode);
+        }
+
+        [Fact, Priority(3)]
+        public async Task GetById_RetornaStatusCode200()
+        {
+            using var context = _serviceProvide.GetService<ApplicationDbContext>();
+
+            ClientesController controllerCliente = new(context);
+
+            var _getRegistroCliente = await controllerCliente.GetById(1);
+
+            OkObjectResult result = _getRegistroCliente as OkObjectResult;
+
+            Assert.Equal(200, result.StatusCode);
+        }
+
+        [Fact, Priority(4)]
+        public async Task Patch_RetornaStatusCode201()
+        {
+            using var context = _serviceProvide.GetService<ApplicationDbContext>();
+
+            ClientesController controllerCliente = new(context);
 
             ClienteDTO NovoCliente = new()
             {
@@ -145,42 +86,19 @@ namespace Tests
                 Senha = "testeSenhaNovo",
             };
 
-            var _registroClienteCriado = await controllerCliente.Post(Cliente);
-
             var _registroClienteAtualizado = await controllerCliente.Patch(1, NovoCliente);
 
             CreatedResult result = _registroClienteAtualizado as CreatedResult;
 
             Assert.Equal(201, result.StatusCode);
         }
-    }
 
-    public class DeleteClientesTest : BaseTest, IClassFixture<DbTeste>
-    {
-        private readonly ServiceProvider _serviceProvide;
-
-        public DeleteClientesTest(DbTeste dbTeste)
-        {
-            _serviceProvide = dbTeste.ServiceProvider;
-        }
-
-        [Fact]
-        public async Task DeleteClientes_RetornaStatusCode200()
+        [Fact, Priority(5)]
+        public async Task Delete_RetornaStatusCode200()
         {
             using var context = _serviceProvide.GetService<ApplicationDbContext>();
 
             ClientesController controllerCliente = new(context);
-
-            ClienteDTO Cliente = new()
-            {
-                Nome = "TesteNomeCliente",
-                Telefone = "11222222222",
-                Cpf = "11111111111",
-                Email = "teste@teste",
-                Senha = "testeSenha",
-            };
-
-            var _registroClienteCriado = await controllerCliente.Post(Cliente);
 
             var _registroDelete = await controllerCliente.Delete(1);
 

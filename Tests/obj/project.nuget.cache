@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5SZv5DGKYd6T9mApekWGdftKFAEU5R6TZA91YmmkUU0bQNhnCuLnEQs7VdMqEqyFKkFu9dpf4mRUMINjjyx6UA==",
+  "dgSpecHash": "AwEftaLcWxl6TxFAr1i9XZEK+cNgISlDgSrQ6ZUe69kWowQwt4E2tjeG498sJjSyjVBFTCGDBBW7dkZN6CIKdg==",
   "success": true,
   "projectFilePath": "c:\\Users\\AOZI\\OneDrive - GFT Technologies SE\\Documents\\ProjetosAtividadesGFT\\desafiopetshopmanager\\Tests\\Tests.csproj",
   "expectedPackageFiles": [
@@ -125,6 +125,7 @@
     "C:\\Users\\AOZI\\.nuget\\packages\\xunit.core\\2.4.1\\xunit.core.2.4.1.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\xunit.extensibility.core\\2.4.1\\xunit.extensibility.core.2.4.1.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\xunit.extensibility.execution\\2.4.1\\xunit.extensibility.execution.2.4.1.nupkg.sha512",
+    "C:\\Users\\AOZI\\.nuget\\packages\\xunit.priority\\1.1.6\\xunit.priority.1.1.6.nupkg.sha512",
     "C:\\Users\\AOZI\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.3\\xunit.runner.visualstudio.2.4.3.nupkg.sha512"
   ],
   "logs": []
